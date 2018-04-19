@@ -1,4 +1,4 @@
-# Arduino: Multiple Register Chips to Manage Lights
+# Arduino: Using multiple register chips to control lights
 
 The inspiration for this project came from a group of students building a prototype for an immersive environment project that utilized a number of LEDs to light constellation patterns using a variety of physical inputs.
 
