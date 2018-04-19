@@ -2,7 +2,7 @@
 
 The inspiration for this project came from a group of students building a prototype for an immersive environment project that utilized a number of LEDs to light constellation patterns using a variety of physical inputs.
 
-In working to help these student better understand how the 74HC595 shift register chip works in series, I came up with the following lesson and example. The lesson below hopefully uses language that is approachable for all levels of learners with a basic understand of mathematics and the Arduino. Please feel free to reach out with comments for improvement or questions.
+In working to help these student better understand how the 74HC595 shift register chip works with its data linked in series, I came up with the following lesson and example. The lesson below hopefully uses language that is approachable for all levels of learners with a basic understand of mathematics and the Arduino. Please feel free to reach out with comments for improvement or questions.
 
 ## First, a quick refresher...
 
@@ -34,27 +34,41 @@ Just for fun, an `int` (integer, or whole number) is 16 bits, but if we forgo th
 
 ## Registers
 
-A register chip job is to take in a power source and divide the power into 8 equal streams who's `on` or `off` state is determined by that stream's correspondence to one of the 8 binary digits in the byte. By changing 8 bits of the binary pattern, we can turn certain streams (in our example, lights) on (`1`) or off (`0`).
+You can think of the register chip's job as taking in a power source and dividing it into 8 equal and controllable streams whose `on` or `off` state is determined by that stream's correspondence to one of the 8 binary digits in the byte. By changing any of the 8 bits of the binary pattern, we can turn certain streams (in our example, lights) on (`1`) or off (`0`).
 
-Multiple registers can be chained together, but will require keeping track of multiple bytes, each one's 8-bits corresponding to one of the registers. Each time we want to change the pattern of any of the registers (ie, change the light pattern in any way at all), we need to re-write the pattern to all of the registers. Hence we want to keep track of all of those patterns for each register.
+For example, a binary pattern of `00100100` could conceivably turn `on` (1) the 3rd and 6th lights (left to right), leaving the other lights `off` (0). The chip matches the *eight* digits in the byte to the *eight* output pins on the chip.
 
-## Multi-register logic
+It's very important to note that when talking about the output streams as they relate to the pins on the chip, the pins are actually numbered starting at 0 and going to 7 to control the eight different streams. So in an example using lights: pin 0 would control the 1st light, pin 1 would control the 2nd light, etc.
 
-So if we have a two byte `array` (multiple variables stored together as one, like a table or spreadsheet) where each byte's value is set to decimal 0, we end up with something like this (with each line of 8-bit byte stored in the array representing the pattern for one of the registers):
+## Multiple register chips
+
+Where things really get interesting is when we connect our chips together to control many streams of output at the same time.
+
+Multiple registers can be chained together, but will of course require keeping track of multiple bytes (patterns). Each chip will have an 8-bit pattern that corresponding to one of the registers, stored as a byte in code. Each time we want to change the pattern of any of the registers (ie, change the light pattern in _any_ way at all), we need to re-write the pattern to all of the registers in the series. Hence we want to keep track of all of those patterns individually for each register.
+
+To allow for flexibly scaling the number of chips we might connect, we create an `array` (multiple variables stored together as one, like a table or spreadsheet) to store all of our bytes (on per chip).
+
+So if we have a two byte array where each byte's value is set to decimal 0, we end up with a chip pattern that looks like this (with each line of 8-bit byte stored in the array representing the pattern for one of the registers):
 
 ```
 00000000
 00000000
 ```
 
-The pattern above tells us that all of the stream lines of power are closed, meaning all the lights are off. Our goal is to change one or more of those bits in the byte's binary pattern to a 1, which will open the stream(s) for that register and turn the lights connected to the respective pins on. So for example, if we wanted to see the light go on in the 1st register at the 4th pin from the left, the pattern looks like this:
+The pattern above tells us that all of the stream lines of power are closed, meaning all the lights are off.
+
+## Changing bits to create new patterns
+
+Our goal is to change one or more of those bits in the byte's binary pattern to a 1, which will open the stream(s) for that register and turn the lights connected to the respective pins on. So using our previous example, if we wanted to see the light connected to the 1st register at the 4th pin from the left go on, the pattern would have to change to look like this:
 
 ```
 00010000
 00000000
 ```
 
-If we were working in decimal, that would mean the bytes in the array need to be set to 16 (`00010000`) and 0 (`00000000`), respectively. Fortunately we don't have to worry about working with decimal numbers on the Arduino (which can be confusing in a hurry). We can use ​​the `bitWrite()` function, which can just pick one of the byte patterns in the array, specify which digit of that pattern needs to be changed (0-7, from left to right of the pattern) and to what binary number (0 or 1), leaving it in an 8-bit binary pattern.
+If we were working in decimal, that would mean the bytes in the array would need to be set to 16 (`00010000`) and 0 (`00000000`), respectively.
+
+Fortunately we don't have to worry about working with decimal numbers on the Arduino (which can be confusing in a hurry). We can use ​​the `bitWrite()` function, which can just pick one of the byte patterns in the array, specify which digit of that pattern needs to be changed (0-7, from left to right of the pattern) and to what binary number (0 or 1), leaving it in an 8-bit binary pattern.
 
 Every time we want to make a change to a light, we have to write to all the registers in a row (it will write the chips in reverse order from the one furthest to the board), meaning it's not enough to just write one bit or one register alone. We have to keep track of all patterns in our array and then write all of the patterns back to the registers in a loop each time there's a change.
 
