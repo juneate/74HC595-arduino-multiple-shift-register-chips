@@ -16,9 +16,14 @@ A byte can be as low as 0 and as high as 255 in decimal (which is `11111111` in 
 
 The digits in a byte translate to decimal by adding the number in the column heading for each of the bits in the byte that are turned on (set to 1), for example:
 
+| 128  | 64   | 32   | 16   | 8    | 4    | 2    | 1    |
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+| 1    | 0    | 1    | 1    | 0    | 1    | 1    | 0    |
+
+When we take all the bits set to 1 and add up their column heading, we get:
+
 ```
-*128 64 32 16  8  4  2  1*
-  1  0  1  1  0  1  1  0  ==  128 + 32 + 16 + 4 + 2  ==  182
+  10110110  ==  128 + 32 + 16 + 4 + 2  ==  182
 ```
 
 Therefor, `10110110` in binary is `182` in decimal (and vice versa). Since a byte is 8-bits, storing `182` in a byte is effectively also like storing `10110110` if we look at it in binary. We just treat the byte however it's convenient for us.
