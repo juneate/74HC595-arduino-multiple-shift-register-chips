@@ -21,7 +21,7 @@ The digits in a byte translate to decimal by adding the number in the column hea
   1  0  1  1  0  1  1  0  ==  128 + 32 + 16 + 4 + 2  ==  182
 ```
 
-Therefor, `10110110` in binary is 182 in decimal (and vice versa). Since a byte is 8-bits, storing 182 in a byte is effectively also like storing `10110110` if we look at it in binary. We just treat the byte however it's convenient for us.
+Therefor, `10110110` in binary is `182` in decimal (and vice versa). Since a byte is 8-bits, storing `182` in a byte is effectively also like storing `10110110` if we look at it in binary. We just treat the byte however it's convenient for us.
 
 ### Extra
 
@@ -57,7 +57,7 @@ Every time we want to make a change to a light, we have to write to all the regi
 
 The setup below was built and tested using [Tinkercad](https://www.tinkercad.com), which is a great way to build and test your projects online for free. Feel free to use and modify the file `multiple_register.brd` to see and test the project for yourself.
 
-![Arduino setup with multiple register chips](multiple_register.png.jpg?raw=true "Arduino setup with multiple register chips")
+![Arduino setup with multiple register chips](multiple_register.png?raw=true "Arduino setup with multiple register chips")
 
 ## Credits
 
