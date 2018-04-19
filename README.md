@@ -14,7 +14,7 @@ In working to help these student better understand how the 74HC595 shift registe
 
 A byte can be as low as 0 and as high as 255 in decimal (which is `11111111` in binary).
 
-The digits in a byte translate to decimal by adding the number in the column heading for each of the bits in the byte that are turned on (set to 1), for example:
+The digits in a byte translate to decimal by adding the number in the column heading for each of the bits in the byte that are turned on (set to 1). For example, take the 8-bit binary number `10110110`:
 
 | 128  | 64   | 32   | 16   | 8    | 4    | 2    | 1    |
 |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
