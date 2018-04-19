@@ -6,9 +6,9 @@ In working to help these student better understand how the 74HC595 shift registe
 
 ## First, a quick refresher...
 
-A `bit` is a binary number (0 or 1).⋅⋅
-A `byte` is a number made of 8-bits.⋅⋅
-A `decimal` number is our standard set of numbers (base-10 place holders).
+- A `bit` is a binary number (0 or 1).
+- A `byte` is a number made of 8-bits.
+- A `decimal` number is our standard set of numbers (base-10 place holders).
 
 ### Bytes
 
@@ -17,7 +17,7 @@ A byte can be as low as 0 and as high as 255 in decimal (which is `11111111` in 
 The digits in a byte translate to decimal by adding the number in the column heading for each of the bits in the byte that are turned on (set to 1), for example:
 
 ```
-128 64 32 16  8  4  2  1
+*128 64 32 16  8  4  2  1*
   1  0  1  1  0  1  1  0  ==  128 + 32 + 16 + 4 + 2  ==  182
 ```
 
@@ -57,7 +57,7 @@ Every time we want to make a change to a light, we have to write to all the regi
 
 The setup below was built and tested using [Tinkercad](https://www.tinkercad.com), which is a great way to build and test your projects online for free. Feel free to use and modify the file `multiple_register.brd` to see and test the project for yourself.
 
-![Arduino setup with multiple register chips](multiple_register.png?raw=true "Arduino setup with multiple register chips")
+![Arduino setup with multiple register chips](multi_register.png?raw=true "Arduino setup with multiple register chips")
 
 ## Credits
 
