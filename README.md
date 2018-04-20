@@ -85,6 +85,8 @@ Every time we want to make a change to a light, we have to write to all the regi
 
 The setup below was built and tested using [Tinkercad](https://www.tinkercad.com), which is a great way to build and test your projects online for free. Feel free to use and modify the file `multiple_register.brd` to see and test the project for yourself.
 
+One important thing to notice (as mentioned above) is that the chip connected directly to the board actually controls the last pins (8-15 in this example). The bytes are written to the chips from the end of the series to the start.
+
 ![Arduino setup with multiple register chips](multi_register.png?raw=true "Arduino setup with multiple register chips")
 
 ## Credits
