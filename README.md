@@ -2,7 +2,16 @@
 
 The inspiration for this project came from a group of students building a prototype for an immersive environment project that utilized a number of LEDs to light constellation patterns using a variety of physical inputs.
 
-In working to help these student better understand how the 74HC595 shift register chip works with its data linked in series, I came up with the following lesson and example. The lesson below hopefully uses language that is approachable for all levels of learners with a basic understand of mathematics and the Arduino. Please feel free to reach out with comments for improvement or questions.
+In working to help these student better understand how the 74HC595 shift register chip works with its data linked in series, I came up with the following lesson and example. The lesson below hopefully uses language that is approachable for all levels of learners with a basic understand of mathematics and the Arduino.
+
+Please feel free to reach out with comments for improvement or questions.
+
+## Overview
+
+Using a pattern of 8 binary numbers, we can control 8 signals to individually turn on or off using a single 74HC595 shift register chip connected to an Arduino. _One output signal that split into 8._
+
+We can then connect multiple chips together to control more signals, all while still connected to the same single output port on our Arduino board.
+
 
 ## First, a quick refresher...
 
