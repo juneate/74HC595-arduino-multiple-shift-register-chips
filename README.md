@@ -1,4 +1,4 @@
-# Arduino: Using multiple register chips to control lights
+# Arduino: Chaining register chips to control multiple signals
 
 The inspiration for this project came from a group of students building a prototype for an immersive environment project that utilized a number of LEDs to light constellation patterns using a variety of physical inputs.
 
