@@ -81,7 +81,7 @@ Fortunately we don't have to worry about working with decimal numbers on the Ard
 
 Every time we want to make a change to a light, we have to write to all the registers in a row (it will write the chips in reverse order from the one furthest to the board), meaning it's not enough to just write one bit or one register alone. We have to keep track of all patterns in our array and then write all of the patterns back to the registers in a loop each time there's a change.
 
-## The setup
+## The board setup
 
 The setup below was built and tested using [Tinkercad](https://www.tinkercad.com), which is a great way to build and test your projects online for free. Feel free to use and modify the file `multiple_register.brd` to see and test the project for yourself.
 
