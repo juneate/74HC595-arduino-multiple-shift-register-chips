@@ -39,20 +39,13 @@ void clearRegisters() {
   }
 }
 
-void writeToRegisters(int pin, bool state) {
-
-  //////
-  // This function the overall pin number (0 to 15 in this example) and figures out which register it's on and what pin it would be on that register
-  //////
-
+// Takes the overall pin number and figures out which register it's on and what pin it would be on that register
+void writePinToByte(int pin, bool state) {
   // Which register are we looking at? 0=first, 1=second, etc. "/" will round down to an int
   int r = pin / 8;
 
   // Which pin on that register, finding the remainder of the pin division will give us 0-7
   int q = pin % 8;
-
-  // Lock the registers to ready them to be written
-  digitalWrite(P_LATCH, LOW);
 
   // Go through each of our stored patterns and write them back to the registers in order
   for (size_t i = 0; i < REGISTERS; i++) {
@@ -66,14 +59,28 @@ void writeToRegisters(int pin, bool state) {
       bitWrite(*pattern, q, state);
     }
 
+  }
+}
+
+void writeToRegisters() {
+
+  // Lock the registers to ready them to be written
+  digitalWrite(P_LATCH, LOW);
+
+  // Go through each of our stored patterns and write them back to the registers in order
+  for (size_t i = 0; i < REGISTERS; i++) {
+
+    // Point to the current pattern for this register
+    byte * pattern = &registerPatterns[i];
+
     // Write the pattern back to the register chips byte by byte
     shiftOut(P_SERIAL, P_CLOCK, MSBFIRST, *pattern);
 
     // Activate to show the byte pattern as a decimal number
-    Serial.println(*pattern);
+    //Serial.println(*pattern);
 
     // Activate to show the byte pattern as a binary number
-    Serial.println(*pattern, BIN);
+    //Serial.println(*pattern, BIN);
   }
 
   // Unlock the registers
@@ -89,7 +96,10 @@ void loop() {
   clearRegisters();
 
   // Write one pin, then cycle it up for the next run
-  writeToRegisters(cycle++, HIGH);
+  writePinToByte(cycle++, HIGH);
+
+  // Write to the registers
+  writeToRegisters();
 
   // Reset the light back to the 0 pin once it hits the end
   if (cycle >= PINS) {
